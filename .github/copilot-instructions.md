@@ -132,11 +132,8 @@ The migration process must follow this order:
 8. Return migration summary
 
 ## Frontend Routes
-- GET / → Landing page with authentication options
-- GET /dashboard → User dashboard showing playlists and migration options
+- GET / → Landing page
 - POST /migrate → Trigger migration process
-- GET /migration-status → Check migration progress
-- GET /migration-summary → Show migration results
 
 ## Naming Conventions
 - Use PascalCase for component names, interfaces, and type aliases
