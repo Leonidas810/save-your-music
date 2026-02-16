@@ -7,6 +7,7 @@ export const env = {
     YOUTUBE_CLIENT_SECRET: process.env.YOUTUBE_CLIENT_SECRET || '',
     YOUTUBE_REDIRECT_URI: process.env.YOUTUBE_REDIRECT_URI || '',
     SESSION_SECRET: process.env.SESSION_SECRET || '',
+    COOKIE_DOMAIN : process.env.COOKIE_DOMAIN || 'localhost',
 };
 
 export default env;

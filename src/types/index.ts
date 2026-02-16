@@ -1,17 +1,24 @@
 export type Platform = 'spotify' | 'youtube' | 'unknown';
 
+export interface PaginateResponse<T> {
+    items: T[];
+    total: number;
+    limit: number;
+    offset: number;
+    next?: string;
+    previous?: string;
+}
 export interface Track {
     title: string;
     artists: string[];
     durationMs?: number;
     source?: Platform;
-    raw?: any;
 }
 
 export interface Playlist {
     id: string;
-    title: string;
+    name: string;
     description?: string;
     tracks?: Track[];
-    raw?: any;
+    images?: { url: string; width: number; height: number }[];
 }
