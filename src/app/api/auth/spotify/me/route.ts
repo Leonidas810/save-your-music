@@ -17,6 +17,7 @@ export async function GET() {
             headers: {
                 Authorization: 'Bearer ' + `${accessToken}`,
             },
+            credentials: 'omit',
         });
 
         if (!res.ok) {

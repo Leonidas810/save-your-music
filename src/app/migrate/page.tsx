@@ -2,7 +2,7 @@
 
 import { PageTemplate } from "@/components/templates/Page.template";
 import { useAppSelector, useAppDispatch } from "@/lib/Redux/useRedux";
-import { setSpotifyAuth } from "@/lib/Redux/slices/authSlice";
+import { setSpotifyAuth,setYoutubeAuth } from "@/lib/Redux/slices/authSlice";
 
 import { Playlist, PaginateResponse } from "@/types";
 
@@ -34,6 +34,18 @@ export default function MigratePage() {
             return res.json();
         },
         enabled: authData?.authenticated ?? false,
+    });
+
+    const {data: youtubeAuthData } = useQuery({
+        queryKey: ["youtubeAuth"],
+        queryFn: async () => {
+            const res = await fetch("/api/auth/youtube/me");
+            dispatch(setYoutubeAuth({
+                user: res.ok ? (await res.json()).user : null,
+                isAuthenticated: res.ok,
+            }));
+            return res.json();
+        },
     });
 
     return (
