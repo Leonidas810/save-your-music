@@ -29,6 +29,7 @@
       "@middleware/*": ["./src/middleware/*"],
       "@config/*": ["./src/config/*"],
       "@routes/*": ["./src/routes/*"],
+      "@lib/*": ["./src/lib/*"]
     }
   },
   "include": [

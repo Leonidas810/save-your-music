@@ -1,11 +1,25 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+type SpotifyUser = {
+  id: string;
+  display_name: string;
+  email: string;
+  images: { height: number; width: number; url: string }[]
+};
+
+type YouTubeUser = {
+  id: string;
+  name: string;
+  email: string;
+  picture: string;
+};
+
 type PlatformAuth = {
   isAuthenticated: boolean;
   accessToken: string | null;
   refreshToken: string | null;
   expiresAt: number | null; // epoch ms
-  userId: string | null;
+  user: SpotifyUser | YouTubeUser | null;
 };
 
 type AuthState = {
@@ -18,7 +32,7 @@ const initialPlatform: PlatformAuth = {
   accessToken: null,
   refreshToken: null,
   expiresAt: null,
-  userId: null,
+  user: null,
 };
 
 const initialState: AuthState = {

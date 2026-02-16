@@ -35,14 +35,23 @@ export async function GET(request: Request) {
         const tokenData = await getSpotifyTokens(code);
         if (!tokenData) return NextResponse.redirect(new URL('/migrate', request.url));
 
-        const { access_token, expires_in } = tokenData;
+        const { access_token, refresh_token, expires_in } = tokenData;
 
-        const successUrl = new URL(`/migrate?spotify_auth=${access_token ? "success" : "failed"}`, request.url);
-        const res = NextResponse.redirect(successUrl);
-        res.cookies.set('spotify_auth', '', {
+        const res = NextResponse.redirect(
+            new URL('/migrate?spotify_auth=success', request.url)
+        );
+
+        res.cookies.set('spotify_tokens', JSON.stringify({
+            access_token,
+            refresh_token,
+            expires_at: Date.now() + expires_in * 1000,
+        }), {
+            httpOnly: true,
+            secure: false, //true in production
+            sameSite: 'lax',
             path: '/',
-            maxAge: typeof expires_in === 'number' ? expires_in : 3600,
-            httpOnly: false,
+            maxAge: expires_in,
+            //domain: env.COOKIE_DOMAIN,
         });
 
         return res;
